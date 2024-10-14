@@ -1,0 +1,18 @@
+FROM python:3.9-slim
+
+# Install Flask and dependencies
+RUN pip install flask
+
+# Copy the server and web interface
+COPY run.sh /
+COPY web /app/web
+COPY data /app/data
+
+# Make the script executable
+RUN chmod a+x /run.sh
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the script
+CMD ["/run.sh"]

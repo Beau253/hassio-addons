@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daddy's Deals Dashboard</title>
+</head>
+<body>
+    <h2>Daddy's Deals Dashboard</h2>
+    <div>
+        <h3>Current Balance: <span id="balance">0</span> Daddy Dollars</h3>
+        <h4>Add New Chore</h4>
+        <input type="text" id="choreName" placeholder="Chore Name">
+        <input type="number" id="rewardAmount" placeholder="Reward Amount (Daddy Dollars)">
+        <button onclick="addChore()">Add Chore</button>
+    </div>
+
+    <script>
+        function addChore() {
+            const chore = {
+                name: document.getElementById('choreName').value,
+                reward_amount: document.getElementById('rewardAmount').value
+            };
+            fetch('/add_chore', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(chore)
+            }).then(response => response.json())
+              .then(data => console.log(data));
+        }
+
+        function fetchBalance() {
+            // Update the balance display
+        }
+    </script>
+</body>
+</html>
